@@ -25,8 +25,11 @@ jobs:
                   sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
                   echo /home/linuxbrew/.linuxbrew/bin >> $GITHUB_PATH
 
+            - name: Register local tap
+              run: brew tap dashlane/tap $PWD
+
             - name: Install Dashlane CLI from rb file
-              run: brew install --build-from-source Formula/dashlane-cli.rb
+              run: brew install --build-from-source dashlane/tap/dashlane-cli
 
             - name: Run brew tests
-              run: brew test Formula/dashlane-cli.rb
+              run: brew test dashlane/tap/dashlane-cli
